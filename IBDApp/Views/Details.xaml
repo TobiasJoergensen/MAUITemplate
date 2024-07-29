@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IBDApp.Views.Details"
+             Title="Details">
+    <VerticalStackLayout>
+        <VerticalStackLayout>
+            <VerticalStackLayout
+                x:Name="OverviewOnCompleted"
+                Padding="0"
+                Spacing="25"
+                IsVisible="false">
+                <CollectionView ItemsSource="{Binding ProfileModels}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <VerticalStackLayout>
+                                <HorizontalStackLayout Padding="20,0,20,0">
+                                    <VerticalStackLayout Spacing="5" WidthRequest="100">
+                                        <Label Text="Name" Style="{StaticResource collectionHeadline}"/>
+                                        <Label Text="{Binding Name}"/>
+                                        <Label Text="Age" Style="{StaticResource collectionHeadline}"/>
+                                        <Label Text="{Binding Age}"/>
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout Spacing="5">
+                                        <Label Text="Description" Style="{StaticResource collectionHeadline}"/>
+                                        <Label Text="{Binding Description}"/>
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                                <Line Stroke="Black" X2="{Binding Width, Source={RelativeSource Self}}" HorizontalOptions="Fill" StrokeThickness="1" />
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout
+                x:Name="OverviewOnLoad"
+                IsVisible="true">
+                <ActivityIndicator IsRunning="True"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout 
+                x:Name="OverviewOnError"
+                IsVisible="false">
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

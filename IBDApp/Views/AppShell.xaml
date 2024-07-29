@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="IBDApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:IBDApp.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Title="IBDApp">
+    <TabBar>
+        <Tab Title="Overview">
+            <ShellContent
+                Title="Overview"
+                ContentTemplate="{DataTemplate local:Overview}"
+                Route="Overview" />
+        </Tab>
+        <Tab Title="Details">
+            <ShellContent
+                Title="Details"
+                ContentTemplate="{DataTemplate local:Details}"
+                Route="Details" />
+        </Tab>
+    </TabBar>
+
+</Shell>
