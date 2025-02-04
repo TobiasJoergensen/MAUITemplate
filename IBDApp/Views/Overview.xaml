@@ -1,39 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IBDApp.Views.Overview">
+             x:Class="IBDApp.Views.OverviewPage"
+             xmlns:local="clr-namespace:IBDApp.ViewModels"
+             x:DataType="local:OverviewViewModel">
 
     <ScrollView>
         <VerticalStackLayout >
-            <VerticalStackLayout
-                x:Name="OverviewOnCompleted"
+            <Grid
+                x:Name="OnReady"
                 Padding="30,0"
                 IsVisible="false">
 
-                <Label x:Name="NameAndAge" Text="{Binding Name, StringFormat='Welcome back, {0}'}" Margin="0,0,0,20" Style="{StaticResource H5}"/>
+                <Label x:Name="NameAndAge" Text="{Binding Name, StringFormat='Welcome back, {0}'}" Margin="0,0,0,20" Style="{StaticResource Header5}"/>
 
                 <Label Text="Description" Margin="0,0,0,5" Style="{StaticResource SubHeadline}"/>
 
                 <Label x:Name="Description" Text="{Binding Description}"/>
 
                 <Button Text="Go to error state" Clicked="Error_button" Margin="0,50,0,0"></Button>
-            </VerticalStackLayout>
+            </Grid>
 
-            <VerticalStackLayout
-                x:Name="OverviewOnLoad"
+            <Grid
+                x:Name="OnLoading"
                 IsVisible="true">
-                    <Label Text="{Binding LoadingText}" HorizontalOptions="Center"></Label>
-                    <ActivityIndicator IsRunning="True"/>
+                <Label Text="{Binding LoadingText}" HorizontalOptions="Center"></Label>
+                <ActivityIndicator IsRunning="True"/>
 
-            </VerticalStackLayout>
+            </Grid>
 
-            <VerticalStackLayout 
-                x:Name="OverviewOnError"
+            <Grid 
+                x:Name="OnError"
                 IsVisible="false">
                 <Label Text="Something went wrong. Please try later." Style="{StaticResource Headline}"/>
 
                 <Button Text="Try to load again" Clicked="Retry_button" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,50,0,0"></Button>
-            </VerticalStackLayout>
+            </Grid>
 
         </VerticalStackLayout>
     </ScrollView>

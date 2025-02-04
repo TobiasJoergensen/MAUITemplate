@@ -8,35 +8,18 @@ using System.Threading.Tasks;
 
 namespace IBDApp.States
 {
-    public class DetailsStateHandler : IStateHandler
+    public class DetailsStateHandler : StateHandlerBase, IStateHandler
     {
-        private Details _detailView;
-        public DetailsStateHandler(Details detailsView)
+        private Grid _gridOnReady;
+        private Grid _gridOnLoading;
+        private Grid _gridOnError;
+        public DetailsStateHandler(DetailsPage detailsView)
         {
-            _detailView = detailsView;
-        }
-        public void setErrorState()
-        {
-            //disable our loading state and start our error state
-            _detailView.GetOverviewOnCompleted.IsVisible = false;
-            _detailView.GetOverviewOnLoading.IsVisible = false;
-            _detailView.GetOverviewOnError.IsVisible = true;
-        }
+            _gridOnReady = (Grid)detailsView.FindByName("OnReady");
+            _gridOnLoading = (Grid)detailsView.FindByName("OnLoading");
+            _gridOnError = (Grid)detailsView.FindByName("OnError");
 
-        public void setLoadingState()
-        {
-            //disable our ready and error state and start our loading state
-            _detailView.GetOverviewOnCompleted.IsVisible = false;
-            _detailView.GetOverviewOnError.IsVisible = false;
-            _detailView.GetOverviewOnLoading.IsVisible = true;
-        }
-
-        public void setReadyState()
-        {
-            //disable our loading state and start our ready state
-            _detailView.GetOverviewOnLoading.IsVisible = false;
-            _detailView.GetOverviewOnError.IsVisible = false;
-            _detailView.GetOverviewOnCompleted.IsVisible = true;
+            base.Init(_gridOnReady, _gridOnLoading, _gridOnError);
         }
     }
 }

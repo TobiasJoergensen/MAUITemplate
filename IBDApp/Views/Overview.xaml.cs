@@ -2,26 +2,20 @@
 
 namespace IBDApp.Views
 {
-    public partial class Overview : ContentPage
+    public partial class OverviewPage : ContentPage
     {
         private OverviewViewModel _viewModel;
-        public VerticalStackLayout GetOverviewOnCompleted { get { return OverviewOnCompleted; } }
-        public VerticalStackLayout GetOverviewOnLoading { get { return OverviewOnLoad; } }
-        public VerticalStackLayout GetOverviewOnError { get { return OverviewOnError; } }
-
-        public Overview()
+        public OverviewPage(OverviewViewModel overviewViewModel)
         {
             InitializeComponent();
-            _viewModel = new OverviewViewModel(this);
-            //Set the binding context to be our viewmodel
+            _viewModel = overviewViewModel;
             BindingContext = _viewModel;
+            _viewModel.Init(this);
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            //When the page is ready to be shown, we start initializing it
-            _viewModel.Init();
         }
 
         private void Error_button(object sender, EventArgs e)
@@ -31,7 +25,7 @@ namespace IBDApp.Views
 
         private void Retry_button(object sender, EventArgs e)
         {
-            _viewModel.Init();
+            _viewModel.Init(this);
         }
     }
 

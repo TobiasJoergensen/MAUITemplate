@@ -2,25 +2,20 @@ using IBDApp.ViewModels;
 
 namespace IBDApp.Views;
 
-public partial class Details : ContentPage
+public partial class DetailsPage : ContentPage
 {
     private DetailsViewModel _viewModel;
-    public VerticalStackLayout GetOverviewOnCompleted { get { return OverviewOnCompleted; } }
-    public VerticalStackLayout GetOverviewOnLoading { get { return OverviewOnLoad; } }
-    public VerticalStackLayout GetOverviewOnError { get { return OverviewOnError; } }
-
-    public Details()
+    public DetailsPage(DetailsViewModel detailsViewModel)
 	{
 		InitializeComponent();
 
-        _viewModel = new DetailsViewModel(this);
-        //Set the binding context to be our viewmodel
+        _viewModel = detailsViewModel;
         BindingContext = _viewModel;
+        _viewModel.Init(this);
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
-        _viewModel.Init();
     }
 }

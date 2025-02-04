@@ -1,36 +1,20 @@
-﻿using IBDApp.Views;
+﻿using IBDApp.States;
+using IBDApp.Views;
 
 namespace IBDApp.State
 {
-    public class OverviewStateHandler : IStateHandler
+    public class OverviewStateHandler : StateHandlerBase, IStateHandler
     {
-        private Overview _overviewView;
-        public OverviewStateHandler(Overview overviewView) { 
-            _overviewView = overviewView;
-        }
+        private Grid _gridOnReady;
+        private Grid _gridOnLoading;
+        private Grid _gridOnError; 
+        
+        public OverviewStateHandler(OverviewPage overviewView) {
+            _gridOnReady = (Grid)overviewView.FindByName("OnReady");
+            _gridOnLoading = (Grid)overviewView.FindByName("OnLoading");
+            _gridOnError = (Grid)overviewView.FindByName("OnError");
 
-        public void setErrorState()
-        {
-            //disable our loading state and start our error state
-            _overviewView.GetOverviewOnCompleted.IsVisible = false;
-            _overviewView.GetOverviewOnLoading.IsVisible = false;
-            _overviewView.GetOverviewOnError.IsVisible = true;
-        }
-
-        public void setLoadingState()
-        {
-            //disable our ready and error state and start our loading state
-            _overviewView.GetOverviewOnCompleted.IsVisible = false;
-            _overviewView.GetOverviewOnError.IsVisible = false;
-            _overviewView.GetOverviewOnLoading.IsVisible = true;
-        }
-
-        public void setReadyState()
-        {
-            //disable our loading state and start our ready state
-            _overviewView.GetOverviewOnLoading.IsVisible = false;
-            _overviewView.GetOverviewOnError.IsVisible = false;
-            _overviewView.GetOverviewOnCompleted.IsVisible = true;
+            base.Init(_gridOnReady, _gridOnLoading, _gridOnError);
         }
     }
 }

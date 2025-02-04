@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IBDApp.Views.Details"
+             x:Class="IBDApp.Views.DetailsPage"
+             xmlns:local="clr-namespace:IBDApp.ViewModels"
              Title="Details">
     <VerticalStackLayout>
         <VerticalStackLayout>
-            <VerticalStackLayout
-                x:Name="OverviewOnCompleted"
+            <Grid
+                x:Name="OnReady"
                 Padding="0"
-                Spacing="25"
                 IsVisible="false">
                 <CollectionView ItemsSource="{Binding ProfileModels}">
                     <CollectionView.ItemTemplate>
@@ -31,18 +31,18 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </VerticalStackLayout>
+            </Grid>
 
-            <VerticalStackLayout
-                x:Name="OverviewOnLoad"
+            <Grid
+                x:Name="OnLoading"
                 IsVisible="true">
                 <ActivityIndicator IsRunning="True"/>
-            </VerticalStackLayout>
+            </Grid>
 
-            <VerticalStackLayout 
-                x:Name="OverviewOnError"
+            <Grid 
+                x:Name="OnError"
                 IsVisible="false">
-            </VerticalStackLayout>
+            </Grid>
 
         </VerticalStackLayout>
     </VerticalStackLayout>

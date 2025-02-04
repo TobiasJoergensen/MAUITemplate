@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Window xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IBDApp.Views.MainWindow"
+             Title="MainWindow"
+             xmlns:local="clr-namespace:IBDApp.Views">
+    <Window.Page>
+        <local:AppShell></local:AppShell>
+    </Window.Page>
+    <Window.TitleBar>
+        <TitleBar HeightRequest="40">
+            <TitleBar.Content>
+                <HorizontalStackLayout VerticalOptions="Center"
+                                       Margin="10,0,0,0">
+                    <Label Text="This is a template"></Label>
+                </HorizontalStackLayout>
+            </TitleBar.Content>
+        </TitleBar>
+    </Window.TitleBar>
+</Window>

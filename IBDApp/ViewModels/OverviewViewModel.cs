@@ -11,11 +11,11 @@ namespace IBDApp.ViewModels
 {
     public class OverviewViewModel : INotifyPropertyChanged
     {
-        private Overview _overviewView;
-        private OverviewStateHandler _overviewStateHandler;
-        private OverviewService _overviewService;
-        private OverviewDomainService _overviewDomainService;
+        private OverviewPage? _overviewView;
+        private OverviewStateHandler? _overviewStateHandler;
+        private OverviewService? _overviewService;
         private ProfileModel ?_profileModel;
+        public OverviewDomainService OverviewDomainService;
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private string _loadingText = "Loading";
@@ -36,15 +36,16 @@ namespace IBDApp.ViewModels
             set => _loadingText = value;
         }
 
-        public OverviewViewModel(Overview overview) {
+        public OverviewViewModel() {
+            OverviewDomainService = new OverviewDomainService();
+        }
+
+        public void Init(OverviewPage overview)
+        {
             _overviewView = overview;
             _overviewStateHandler = new OverviewStateHandler(overview);
             _overviewService = new OverviewService();
-            _overviewDomainService = new OverviewDomainService();
-        }
 
-        public void Init()
-        {
             LoadData();
         }
 
@@ -87,8 +88,8 @@ namespace IBDApp.ViewModels
 
             if (_profileModel != null) {
                 //Change business logic
-                _profileModel.FullName = _overviewDomainService.FormatNameAndAge(_profileModel.Name, _profileModel.Age);
-                _profileModel.Description = _overviewDomainService.FormatDescription(_profileModel.Description);
+                _profileModel.FullName = OverviewDomainService.FormatNameAndAge(_profileModel.Name, _profileModel.Age);
+                _profileModel.Description = OverviewDomainService.FormatDescription(_profileModel.Description);
 
                 //Notify our binding context that the name property has updated
                 UpdateUI();

@@ -1,4 +1,5 @@
 ﻿using IBDApp.Models;
+using IBDApp.Services;
 using IBDApp.States;
 using IBDApp.Views;
 using System;
@@ -11,41 +12,36 @@ using System.Threading.Tasks;
 
 namespace IBDApp.ViewModels
 {
-    public  class DetailsViewModel : INotifyPropertyChanged
+    public class DetailsViewModel : ViewModelBase
     {
-        private Details _detailsView;
-        private DetailsStateHandler _detailsStateHandler;
+        private DetailsPage? _detailsPage;
+        private DetailsStateHandler? _detailsStateHandler;
+        private IDetailsService _detailsService;
+
         public List<ProfileModel> ProfileModels { get { return _profileModels; } set { _profileModels = value; } }
         private List<ProfileModel> _profileModels = new List<ProfileModel>();
-        public event PropertyChangedEventHandler? PropertyChanged;
 
-        public DetailsViewModel(Details detailsView)
+        public DetailsViewModel(IDetailsService detailsService)
         {
-            _detailsView = detailsView;
-            _detailsStateHandler = new DetailsStateHandler(detailsView);
+            _detailsService = detailsService;
         }
 
-        public void Init()
+        public void Init(DetailsPage details)
         {
+            _detailsPage = details;
+
             CreateMockData();
             UpdateUI();
-            _detailsStateHandler.setReadyState();
+            _detailsStateHandler = new DetailsStateHandler(details);
+            _detailsStateHandler?.setReadyState();
         }
 
         private void CreateMockData()
         {
             _profileModels.Clear();
-
-            for (var i = 0; i < 5; i++)
-            {
-                _profileModels.Add(new ProfileModel(i, $"User {i}", $"Description of user {i}", i));
-            }
-
-            ProfileModels = _profileModels;
+            var data = _detailsService.GetProfiles();
+            ProfileModels = data;
         }
-
-        public void OnPropertyChanged([CallerMemberName] string name = "") =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
         private void UpdateUI()
         {

@@ -2,15 +2,24 @@
 {
     public class OverviewDomainService
     {
-        //All testable logic is placed in here in favor of having it in our model or our viewmodel. It's a hard requirement that all the used values are put as formal parameters
+        /// <summary>
+        /// Formats a string of name and age by comma seperation.
+        /// </summary>
+        /// <param name="name">Name of the user.</param>
+        /// <param name="age">Age of the user.</param>
+        /// <returns></returns>
         public string FormatNameAndAge(string name, int age)
         {
             return $"{name}, {age.ToString()}";
         }
 
+        /// <summary>
+        /// Formats a description to a constant if it is under 5 characters.
+        /// </summary>
+        /// <param name="description">Description of the user.</param>
+        /// <returns></returns>
         public string FormatDescription(string description)
         {
-            //If description is shorter than 5, we return a default text
             if (description.Length < 5)
             {
                 return "No description yet";
