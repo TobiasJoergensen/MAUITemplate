@@ -7,6 +7,9 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Diagnostics;
 using IBDApp.Resources.Strings;
+using System.ComponentModel.DataAnnotations;
+using IBDApp.Validation;
+using IBDApp.Validation.Rules;
 
 namespace IBDApp.ViewModels
 {
@@ -18,10 +21,31 @@ namespace IBDApp.ViewModels
         private ProfileModel ?_profileModel;
         public OverviewDomainService OverviewDomainService;
 
+        private Validation<string> _correctName = new Validation<string>();
+        private bool _invalidName = false;
+
         private string _loadingText = "Loading";
         public string Name
         {
             get => (String.Format(Language.WelcomeLabel, (_profileModel?.FullName ?? string.Empty)));
+        }
+
+        public string CorrectUsername
+        {
+            get => _correctName.Value;
+            set {
+                _correctName.Value = value;
+                InvalidName = !_correctName.Validate();
+            } 
+        }
+
+        public bool InvalidName
+        {
+            get => _invalidName;
+            set { 
+                _invalidName = value;
+                OnPropertyChanged(nameof(InvalidName));
+            }
         }
 
         public string Description
@@ -45,7 +69,12 @@ namespace IBDApp.ViewModels
             _overviewStateHandler = new OverviewStateHandler(overview);
             _overviewService = new OverviewService();
 
+            InitValidations();
             LoadData();
+        }
+
+        private void InitValidations() {
+            _correctName.Validations.Add(new UsernameRule<string> { ValidationMessage = "Invalid name. Must be 5 char." });
         }
 
         private async void LoadData()

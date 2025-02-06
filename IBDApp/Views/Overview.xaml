@@ -23,6 +23,13 @@
                     <Label Text="{x:Static strings:Language.UserAge}" 
                            Margin="0,0,0,5" Style="{StaticResource SubHeadline}"/>
                     <Label x:Name="Description" Text="{Binding Description}"/>
+
+                    <Entry TextChanged="Entry_TextChanged"
+                           Text="{Binding CorrectUsername}">
+                    </Entry>
+                    <Label Text="Name is wrong"
+                           IsVisible="{Binding InvalidName}">
+                    </Label>
                 </VerticalStackLayout>
 
                 <Button Text="{x:Static strings:Language.ErrorStateButton}" 

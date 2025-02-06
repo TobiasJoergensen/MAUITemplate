@@ -27,6 +27,11 @@ namespace IBDApp.Views
         {
             _viewModel.Init(this);
         }
+
+        private void Entry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            _viewModel.CorrectUsername = e.NewTextValue;
+        }
     }
 
 }

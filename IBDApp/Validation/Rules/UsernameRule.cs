@@ -13,7 +13,7 @@ namespace IBDApp.Validation.Rules
         public bool Check(T value) {
             if (value is string username
                 && !string.IsNullOrEmpty(username)
-                && username.Length > 3)
+                && username.Length > 5)
             {
                 return true;
             }
