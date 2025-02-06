@@ -10,7 +10,7 @@
         <Tab Title="Overview">
             <ShellContent
                 Title="Overview"
-                ContentTemplate="{DataTemplate local:OverviewPage}"
+                ContentTemplate="{DataTemplate local:OverviewPage}"                
                 Route="Overview" />
         </Tab>
         <Tab Title="Details">

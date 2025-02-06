@@ -6,23 +6,22 @@ using IBDApp.Views;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Diagnostics;
+using IBDApp.Resources.Strings;
 
 namespace IBDApp.ViewModels
 {
-    public class OverviewViewModel : INotifyPropertyChanged
+    public class OverviewViewModel : ViewModelBase
     {
         private OverviewPage? _overviewView;
         private OverviewStateHandler? _overviewStateHandler;
         private OverviewService? _overviewService;
         private ProfileModel ?_profileModel;
         public OverviewDomainService OverviewDomainService;
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         private string _loadingText = "Loading";
-
         public string Name
         {
-            get => (_profileModel?.FullName ?? string.Empty);
+            get => (String.Format(Language.WelcomeLabel, (_profileModel?.FullName ?? string.Empty)));
         }
 
         public string Description
@@ -51,7 +50,6 @@ namespace IBDApp.ViewModels
 
         private async void LoadData()
         {
-            //We want to run network operations async to avoid a frozen UI
             _overviewStateHandler?.setLoadingState();
 
             var cancellationToken = new CancellationTokenSource();
@@ -84,19 +82,17 @@ namespace IBDApp.ViewModels
             await Task.Run(() =>
             {
                 _profileModel = _overviewService.GetProfileModel();
+                Thread.Sleep(2000);
             });
 
             if (_profileModel != null) {
-                //Change business logic
                 _profileModel.FullName = OverviewDomainService.FormatNameAndAge(_profileModel.Name, _profileModel.Age);
                 _profileModel.Description = OverviewDomainService.FormatDescription(_profileModel.Description);
 
-                //Notify our binding context that the name property has updated
                 UpdateUI();
                 cancellationToken.Cancel();
                 cancellationToken.Dispose();
 
-                //Change the UI to the ready state
                 _overviewStateHandler?.setReadyState();
                 
                 return;
@@ -105,12 +101,9 @@ namespace IBDApp.ViewModels
             cancellationToken.Dispose();
             _overviewStateHandler?.setErrorState();
         }
-        public void OnPropertyChanged([CallerMemberName] string name = "") =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
         private void UpdateUI()
         {
-            //Notify all the relevant bindings
             OnPropertyChanged(nameof(Name));
             OnPropertyChanged(nameof(Description));
         }

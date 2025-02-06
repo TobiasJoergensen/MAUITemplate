@@ -61,11 +61,74 @@ namespace IBDApp.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Template app.
+        ///   Looks up a localized string similar to Try to load again..
+        /// </summary>
+        internal static string ErrorReload {
+            get {
+                return ResourceManager.GetString("ErrorReload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to error state.
+        /// </summary>
+        internal static string ErrorStateButton {
+            get {
+                return ResourceManager.GetString("ErrorStateButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Something went wrong. Please try later..
+        /// </summary>
+        internal static string ErrorStateLabel {
+            get {
+                return ResourceManager.GetString("ErrorStateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title of the application.
         /// </summary>
         internal static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Age.
+        /// </summary>
+        internal static string UserAge {
+            get {
+                return ResourceManager.GetString("UserAge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string UserDescription {
+            get {
+                return ResourceManager.GetString("UserDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string UserName {
+            get {
+                return ResourceManager.GetString("UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome back, {0}.
+        /// </summary>
+        internal static string WelcomeLabel {
+            get {
+                return ResourceManager.GetString("WelcomeLabel", resourceCulture);
             }
         }
     }

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IBDApp.Views.DetailsPage"
              xmlns:local="clr-namespace:IBDApp.ViewModels"
+             xmlns:strings="clr-namespace:IBDApp.Resources.Strings"
              Title="Details">
     <VerticalStackLayout>
         <VerticalStackLayout>
@@ -16,17 +17,23 @@
                             <VerticalStackLayout>
                                 <HorizontalStackLayout Padding="20,0,20,0">
                                     <VerticalStackLayout Spacing="5" WidthRequest="100">
-                                        <Label Text="Name" Style="{StaticResource collectionHeadline}"/>
+                                        <Label Text="{x:Static strings:Language.UserName}" 
+                                               Style="{StaticResource collectionHeadline}"/>
                                         <Label Text="{Binding Name}"/>
-                                        <Label Text="Age" Style="{StaticResource collectionHeadline}"/>
+                                        <Label Text="{x:Static strings:Language.UserAge}" 
+                                               Style="{StaticResource collectionHeadline}"/>
                                         <Label Text="{Binding Age}"/>
                                     </VerticalStackLayout>
                                     <VerticalStackLayout Spacing="5">
-                                        <Label Text="Description" Style="{StaticResource collectionHeadline}"/>
+                                        <Label Text="{x:Static strings:Language.UserDescription}" 
+                                               Style="{StaticResource collectionHeadline}"/>
                                         <Label Text="{Binding Description}"/>
                                     </VerticalStackLayout>
                                 </HorizontalStackLayout>
-                                <Line Stroke="Black" X2="{Binding Width, Source={RelativeSource Self}}" HorizontalOptions="Fill" StrokeThickness="1" />
+                                <Line Stroke="Black" 
+                                      X2="{Binding Width, Source={RelativeSource Self}}" 
+                                      HorizontalOptions="Fill" 
+                                      StrokeThickness="1" />
                             </VerticalStackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

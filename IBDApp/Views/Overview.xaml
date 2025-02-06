@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IBDApp.Views.OverviewPage"
              xmlns:local="clr-namespace:IBDApp.ViewModels"
+             xmlns:strings="clr-namespace:IBDApp.Resources.Strings"
              x:DataType="local:OverviewViewModel">
 
     <ScrollView>
@@ -10,31 +11,52 @@
             <Grid
                 x:Name="OnReady"
                 Padding="30,0"
-                IsVisible="false">
+                IsVisible="false"
+                RowDefinitions="Auto,*,Auto">
 
-                <Label x:Name="NameAndAge" Text="{Binding Name, StringFormat='Welcome back, {0}'}" Margin="0,0,0,20" Style="{StaticResource Header5}"/>
+                <VerticalStackLayout Grid.Row="0">
+                    <Label x:Name="NameAndAge" 
+                           Text="{Binding Name}" 
+                           Margin="0,0,0,20" 
+                           Style="{StaticResource Header5}"/>
 
-                <Label Text="Description" Margin="0,0,0,5" Style="{StaticResource SubHeadline}"/>
+                    <Label Text="{x:Static strings:Language.UserAge}" 
+                           Margin="0,0,0,5" Style="{StaticResource SubHeadline}"/>
+                    <Label x:Name="Description" Text="{Binding Description}"/>
+                </VerticalStackLayout>
 
-                <Label x:Name="Description" Text="{Binding Description}"/>
-
-                <Button Text="Go to error state" Clicked="Error_button" Margin="0,50,0,0"></Button>
+                <Button Text="{x:Static strings:Language.ErrorStateButton}" 
+                        Clicked="Error_button" 
+                        Margin="0,50,0,0"
+                        Grid.Row="2"></Button>
             </Grid>
 
             <Grid
                 x:Name="OnLoading"
-                IsVisible="true">
-                <Label Text="{Binding LoadingText}" HorizontalOptions="Center"></Label>
-                <ActivityIndicator IsRunning="True"/>
+                IsVisible="true"
+                RowDefinitions="Auto,Auto,*">
+                <Label Text="{Binding LoadingText}" 
+                       HorizontalOptions="Center" 
+                       Grid.Row="0"></Label>
+                <ActivityIndicator IsRunning="True"
+                                   Grid.Row="1"/>
 
             </Grid>
 
             <Grid 
                 x:Name="OnError"
-                IsVisible="false">
-                <Label Text="Something went wrong. Please try later." Style="{StaticResource Headline}"/>
+                IsVisible="false"
+                RowDefinitions="Auto,*,Auto">
+                <Label Text="{x:Static strings:Language.ErrorStateLabel}" 
+                       Style="{StaticResource Headline}"
+                       Grid.Row="0"/>
 
-                <Button Text="Try to load again" Clicked="Retry_button" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,50,0,0"></Button>
+                <Button Text="{x:Static strings:Language.ErrorReload}" 
+                        Clicked="Retry_button" 
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center" 
+                        Margin="0,50,0,0"
+                        Grid.Row="2"></Button>
             </Grid>
 
         </VerticalStackLayout>

@@ -2,8 +2,9 @@
 <Window xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IBDApp.Views.MainWindow"
-             Title="MainWindow"
-             xmlns:local="clr-namespace:IBDApp.Views">
+             xmlns:local="clr-namespace:IBDApp.Views"
+             xmlns:strings="clr-namespace:IBDApp.Resources.Strings"
+             Title="MainWindow">
     <Window.Page>
         <local:AppShell></local:AppShell>
     </Window.Page>
@@ -12,7 +13,7 @@
             <TitleBar.Content>
                 <HorizontalStackLayout VerticalOptions="Center"
                                        Margin="10,0,0,0">
-                    <Label Text="This is a template"></Label>
+                    <Label Text="{x:Static strings:Language.Title}"></Label>
                 </HorizontalStackLayout>
             </TitleBar.Content>
         </TitleBar>

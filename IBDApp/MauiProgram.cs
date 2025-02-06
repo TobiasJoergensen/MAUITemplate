@@ -33,6 +33,7 @@ namespace IBDApp
         public static MauiAppBuilder RegisterViews(this MauiAppBuilder mauiAppBuilder) {
             mauiAppBuilder.Services.AddSingleton<DetailsPage>();
             mauiAppBuilder.Services.AddSingleton<OverviewPage>();
+            mauiAppBuilder.Services.AddSingleton<MainWindow>();
 
             return mauiAppBuilder;
         }
